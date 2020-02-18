@@ -1,0 +1,11 @@
+C:\Users\360admin\source\repos\SIF_RPC_TestClient\SI.Shared.Sif.Testclient\SI.Shared.Sif.Testclient.Common\bin\Debug\netstandard2.0\SI.Shared.Sif.Testclient.Common.deps.json
+C:\Users\360admin\source\repos\SIF_RPC_TestClient\SI.Shared.Sif.Testclient\SI.Shared.Sif.Testclient.Common\bin\Debug\netstandard2.0\SI.Shared.Sif.Testclient.Common.dll
+C:\Users\360admin\source\repos\SIF_RPC_TestClient\SI.Shared.Sif.Testclient\SI.Shared.Sif.Testclient.Common\bin\Debug\netstandard2.0\SI.Shared.Sif.Testclient.Common.pdb
+C:\Users\360admin\source\repos\SIF_RPC_TestClient\SI.Shared.Sif.Testclient\SI.Shared.Sif.Testclient.Common\bin\Debug\netstandard2.0\SI.Shared.Sif.Testclient.Common.Entities.dll
+C:\Users\360admin\source\repos\SIF_RPC_TestClient\SI.Shared.Sif.Testclient\SI.Shared.Sif.Testclient.Common\bin\Debug\netstandard2.0\SI.Shared.Sif.Testclient.Common.Entities.pdb
+C:\Users\360admin\source\repos\SIF_RPC_TestClient\SI.Shared.Sif.Testclient\SI.Shared.Sif.Testclient.Common\obj\Debug\netstandard2.0\SI.Shared.Sif.Testclient.Common.csprojAssemblyReference.cache
+C:\Users\360admin\source\repos\SIF_RPC_TestClient\SI.Shared.Sif.Testclient\SI.Shared.Sif.Testclient.Common\obj\Debug\netstandard2.0\SI.Shared.Sif.Testclient.Common.AssemblyInfoInputs.cache
+C:\Users\360admin\source\repos\SIF_RPC_TestClient\SI.Shared.Sif.Testclient\SI.Shared.Sif.Testclient.Common\obj\Debug\netstandard2.0\SI.Shared.Sif.Testclient.Common.AssemblyInfo.cs
+C:\Users\360admin\source\repos\SIF_RPC_TestClient\SI.Shared.Sif.Testclient\SI.Shared.Sif.Testclient.Common\obj\Debug\netstandard2.0\SI.Shared.Sif.Testclient.Common.csproj.CopyComplete
+C:\Users\360admin\source\repos\SIF_RPC_TestClient\SI.Shared.Sif.Testclient\SI.Shared.Sif.Testclient.Common\obj\Debug\netstandard2.0\SI.Shared.Sif.Testclient.Common.dll
+C:\Users\360admin\source\repos\SIF_RPC_TestClient\SI.Shared.Sif.Testclient\SI.Shared.Sif.Testclient.Common\obj\Debug\netstandard2.0\SI.Shared.Sif.Testclient.Common.pdb

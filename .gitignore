@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/SIF_RPC_TestClient/v16
+/SI.Shared.Sif.Testclient/.vs/SI.Shared.Sif.Testclient
