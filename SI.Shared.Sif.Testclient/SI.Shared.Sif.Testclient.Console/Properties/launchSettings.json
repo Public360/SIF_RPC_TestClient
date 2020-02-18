@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "SI.Shared.Sif.Testclient.Console": {
+      "commandName": "Project",
+      "commandLineArgs": "GetSIFVersion"
+    }
+  }
+}
