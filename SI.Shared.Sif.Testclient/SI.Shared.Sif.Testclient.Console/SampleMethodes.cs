@@ -45,6 +45,54 @@ namespace SI.Shared.Sif.Testclient.Console
             return createDocumentOKResponse;
         }
 
+        public static CreateDocumentWithFileStreamResponse CreateDocumentWithFileStream(ServiceHelper serviceHelper, DocumentInfo documentInfo)
+        {
+            Byte[] bytes = File.ReadAllBytes(@$"{documentInfo.File_Path}");
+
+            UploadArgs uploadArgsParameter = new UploadArgs(new UploadArgsParameter()
+            {
+                FileData = bytes.Select(b => b as object).ToList(),
+                FileFormat = documentInfo.File_Format,
+                FileName = documentInfo.File_Title
+            });
+
+            UploadOKResponse uploadOKResponse = serviceHelper.FileService.Upload(uploadArgsParameter);
+            
+            CreateDocumentArgsParameterFilesItem file = new CreateDocumentArgsParameterFilesItem()
+            {
+                Title = documentInfo.File_Title,
+                Format = documentInfo.File_Format,
+                UploadedFileReference = uploadOKResponse.FileReference
+            };
+
+            List<CreateDocumentArgsParameterFilesItem> files = new List<CreateDocumentArgsParameterFilesItem>();
+            files.Add(file);
+
+            CreateDocumentArgs createDocumentArgs = new CreateDocumentArgs(new CreateDocumentArgsParameter()
+            {
+                CaseNumber = documentInfo.CaseNumber,
+                Title = documentInfo.Title,
+                UnofficialTitle = documentInfo.UnofficialTitle,
+                DocumentDate = documentInfo.DocumentDate,
+                JournalDate = documentInfo.JournalDate,
+                DispatchedDate = documentInfo.DispatchedDate,
+                Category = documentInfo.Category,
+                Status = documentInfo.Status,
+                Files = files
+                
+            });
+
+            CreateDocumentOKResponse createDocumentOKResponse = serviceHelper.DocumentService.CreateDocument(createDocumentArgs);
+
+            CreateDocumentWithFileStreamResponse createDocumentWithFileStreamResponse = new CreateDocumentWithFileStreamResponse() 
+            {
+                uploadOKResponse = uploadOKResponse, 
+                createDocumentOKResponse = createDocumentOKResponse 
+            };
+
+            return createDocumentWithFileStreamResponse;
+        }
+
         /// <summary>
         /// Getting SIF version(se doc if you get Json deserialization)
         /// </summary>

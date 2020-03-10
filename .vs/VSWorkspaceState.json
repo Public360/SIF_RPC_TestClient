@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\Builds",
+    "\\SI.Shared.Sif.Testclient",
+    "\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Common",
+    "\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Common\\DocumentService\\Models",
+    "\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Console",
+    "\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Entities"
+  ],
+  "SelectedNode": "\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.sln",
+  "PreviewInSolutionExplorer": false
+}

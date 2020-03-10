@@ -14,6 +14,7 @@ using System.Collections.Generic;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.FileExtensions;
 using Microsoft.Extensions.Configuration.Json;
+using System.Threading;
 
 namespace SI.Shared.Sif.Testclient.Console
 {
@@ -30,9 +31,11 @@ namespace SI.Shared.Sif.Testclient.Console
 
 
                     IConfiguration config = new ConfigurationBuilder()
-                        .AddJsonFile("appsettings.json", true, true)
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("appsettings.json", false, true)
                         .Build();
 
+                    Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
 
                     string getEnterpriseExternalId = config["GetEnterpriseExternalId"];
                     string createOrUpdateEnterpriseExternalID = config["CreateOrUpdateEnterpriseExternalID"];
@@ -53,8 +56,7 @@ namespace SI.Shared.Sif.Testclient.Console
                         switch (arg)
                         {
                             case "CreateDocument":
-                                var response = SampleMethodes.CreateDocument(serviceHelper, documentInfo);
-                                System.Console.WriteLine($"respons successful = { response.Successful }");
+                                CreateDocument(serviceHelper, documentInfo);
                                 break;
                             case "GetSIFVersion":
                                 var response1 = SampleMethodes.GetSIFVersion(serviceHelper);
@@ -62,6 +64,7 @@ namespace SI.Shared.Sif.Testclient.Console
                                 break;
                             case "GetEnterprises":
                                 var response2 = SampleMethodes.GetEnterprises(serviceHelper);
+                                LogToConsole(response2.Successful ?? false, response2.ErrorMessage, response2.ErrorDetails);
                                 System.Console.WriteLine($"Returned { response2.TotalCount } enterprises");
                                 break;
                             case "GetEnterprise":
@@ -72,25 +75,87 @@ namespace SI.Shared.Sif.Testclient.Console
                                 var response4 = SampleMethodes.CreateOrUpdateEnterprise(serviceHelper,
                                     createOrUpdateEnterpriseConfig["ExternalId"],
                                     createOrUpdateEnterpriseConfig["Name"]);
-                                System.Console.WriteLine($"respons successful = { response4.Successful }");
+                                LogToConsole(response4.Successful ?? false, response4.ErrorMessage, response4.ErrorDetails);
                                 break;
                             case "CreateOrUpdateUserAndContact":
                                 var response5 = SampleMethodes.CreateOrUpdateUserAndContact(serviceHelper, userInfo);
-                                System.Console.WriteLine($"Contact respons successful = { response5.synchronizeContactPersonOKResponse.Successful }");
-                                System.Console.WriteLine($"User respons successful = { response5.synchronizeUserOKResponset.Successful }");
+                                LogToConsole(response5);
                                 break;
                         }
                     }
+                }
+                catch(HttpOperationException he)
+                {
+                    System.Console.ForegroundColor = ConsoleColor.Red;
+                    System.Console.WriteLine($"Operation = {arg}, encountered an exeption");
+                    System.Console.WriteLine($"ErrorMessage = {he.Message}");
+                    System.Console.WriteLine($"ResponseHeaders = {he.Response.Headers}");
+                    System.Console.WriteLine($"ResponseReason = {he.Response.ReasonPhrase}");
+                    System.Console.WriteLine($"ResponseContent = {he.Response.Content}");
+                    System.Console.ForegroundColor = ConsoleColor.White;
                 }
                 catch (Exception e)
                 {
                     //This would be the place to write errors to a log if needed
                     System.Console.ForegroundColor = ConsoleColor.Red;
-                    System.Console.WriteLine($"Operation = {arg}");
+                    System.Console.WriteLine($"Operation = {arg}, encountered an exeption");
                     System.Console.WriteLine($"ErrorMessage = {e.Message}");
                     System.Console.ForegroundColor = ConsoleColor.White;
                 }
             }
+        }
+
+        private static void CreateDocument(ServiceHelper serviceHelper, DocumentInfo documentInfo)
+        {
+            if (documentInfo.StreamFile)
+            {
+                var response = SampleMethodes.CreateDocumentWithFileStream(serviceHelper, documentInfo);
+                LogToConsole(response);
+            }
+            else
+            {
+                var response = SampleMethodes.CreateDocument(serviceHelper, documentInfo);
+                LogToConsole(response.Successful ?? false, response.ErrorMessage, response.ErrorDetails);
+            }
+        }
+
+        private static void LogToConsole(bool successful, string errorMessage, string errorDetails)
+        {
+            System.Console.WriteLine($"respons successful = { successful }");
+
+            if(successful == false)
+            {
+                System.Console.ForegroundColor = ConsoleColor.Red;
+                System.Console.WriteLine($"respons ErrorMessage = { errorMessage }");
+                System.Console.WriteLine($"respons ErrorDetails = { errorDetails }");
+                System.Console.ForegroundColor = ConsoleColor.White;
+            }
+        }
+
+        private static void LogToConsole(CreateOrUpdateUserAndContactResponse response)
+        {
+            System.Console.WriteLine($"User respons: ");
+            LogToConsole(response.synchronizeUserOKResponset.Successful ?? false,
+                response.synchronizeUserOKResponset.ErrorMessage,
+                response.synchronizeUserOKResponset.ErrorDetails);
+
+            System.Console.WriteLine($"Contact respons: ");
+            LogToConsole(response.synchronizeContactPersonOKResponse.Successful ?? false,
+                response.synchronizeContactPersonOKResponse.ErrorMessage,
+                response.synchronizeContactPersonOKResponse.ErrorDetails);
+        }
+
+        private static void LogToConsole(CreateDocumentWithFileStreamResponse response)
+        {
+            System.Console.WriteLine($"File respons: ");
+            LogToConsole(response.uploadOKResponse.Successful ?? false,
+                response.uploadOKResponse.ErrorMessage,
+                response.uploadOKResponse.ErrorDetails);
+
+            System.Console.WriteLine($"Document respons: ");
+            LogToConsole(response.createDocumentOKResponse.Successful ?? false,
+                response.createDocumentOKResponse.ErrorMessage,
+                response.createDocumentOKResponse.ErrorDetails);
         }
     }
 }

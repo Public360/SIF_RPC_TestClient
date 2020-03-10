@@ -17,6 +17,7 @@ namespace SI.Shared.Sif.Testclient.Common.Helpers
         public UserService UserService { get; private set; }
         public ContactService ContactService { get; private set; }
         public DocumentService DocumentService { get; private set; }
+        public FileService FileService { get; private set; }
 
         public ServiceHelper(ServiceInformation serviceInformation)
         {
@@ -41,6 +42,10 @@ namespace SI.Shared.Sif.Testclient.Common.Helpers
 
                 DocumentService = new DocumentService(
                     serviceInformation.DocumentServiceUri,
+                    serviceInformation.Credentials);
+
+                FileService = new FileService(
+                    serviceInformation.FileServiceUri,
                     serviceInformation.Credentials);
             }
             catch (Exception e)

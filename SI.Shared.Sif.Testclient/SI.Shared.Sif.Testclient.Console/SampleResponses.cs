@@ -10,4 +10,10 @@ namespace SI.Shared.Sif.Testclient.Common.Entities
         public SynchronizeContactPersonOKResponse synchronizeContactPersonOKResponse { get; set; }
         public SynchronizeUserOKResponse synchronizeUserOKResponset { get; set; }
     }
+
+    public class CreateDocumentWithFileStreamResponse
+    {
+        public UploadOKResponse uploadOKResponse { get; set; }
+        public CreateDocumentOKResponse createDocumentOKResponse { get; set; }
+    }
 }

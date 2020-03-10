@@ -41,6 +41,9 @@ namespace SI.Shared.Sif.Testclient.Common.Entities
         [JsonProperty("Status")]
         public string Status { get; set; }
 
+        [JsonProperty("StreamFile")]
+        public bool StreamFile { get; set; }
+
         public static DocumentInfo CreateSample()
         {
             return new DocumentInfo()

@@ -4,3 +4,4 @@
 
 /.vs/SIF_RPC_TestClient/v16
 /SI.Shared.Sif.Testclient/.vs/SI.Shared.Sif.Testclient
+/SI.Shared.Sif.Testclient/SI.Shared.Sif.Testclient.Common/obj/Release/netstandard2.0

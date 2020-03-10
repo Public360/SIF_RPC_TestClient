@@ -11,6 +11,7 @@ namespace SI.Shared.Sif.Testclient.Common.Entities
         public Uri UserServiceUri { get; private set; }
         public Uri ContactServiceUri { get; private set; }
         public Uri DocumentServiceUri { get; private set; }
+        public Uri FileServiceUri { get; private set; }
 
         public ServiceInformation(string authkey, string baseUri)
         {
@@ -32,6 +33,7 @@ namespace SI.Shared.Sif.Testclient.Common.Entities
                 UserServiceUri = new Uri($"{baseUri}/Biz/v2/api/call/SI.Data.RPC/SI.Data.RPC/UserService");
                 ContactServiceUri = new Uri($"{baseUri}/Biz/v2/api/call/SI.Data.RPC/SI.Data.RPC/ContactService");
                 DocumentServiceUri = new Uri($"{baseUri}/Biz/v2/api/call/SI.Data.RPC/SI.Data.RPC/DocumentService");
+                FileServiceUri = new Uri($"{baseUri}/Biz/v2/api/call/SI.Data.RPC/SI.Data.RPC/FileService");
             }
             catch(Exception e)
             {
