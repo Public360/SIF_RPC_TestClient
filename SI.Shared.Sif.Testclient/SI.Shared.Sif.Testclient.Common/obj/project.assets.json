@@ -879,7 +879,7 @@
           "lib/netstandard1.3/System.Xml.ReaderWriter.dll": {}
         }
       },
-      "SI.Shared.Sif.Testclient.Common.Entities/1.1.0": {
+      "SI.Shared.Sif.Testclient.Common.Entities/1.1.1": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -1694,7 +1694,7 @@
           "lib/netstandard1.3/System.Xml.ReaderWriter.dll": {}
         }
       },
-      "SI.Shared.Sif.Testclient.Common.Entities/1.1.0": {
+      "SI.Shared.Sif.Testclient.Common.Entities/1.1.1": {
         "type": "project",
         "framework": ".NETStandard,Version=v2.0",
         "dependencies": {
@@ -4575,7 +4575,7 @@
         "system.xml.readerwriter.nuspec"
       ]
     },
-    "SI.Shared.Sif.Testclient.Common.Entities/1.1.0": {
+    "SI.Shared.Sif.Testclient.Common.Entities/1.1.1": {
       "type": "project",
       "path": "../SI.Shared.Sif.Testclient.Entities/SI.Shared.Sif.Testclient.Common.Entities.csproj",
       "msbuildProject": "../SI.Shared.Sif.Testclient.Entities/SI.Shared.Sif.Testclient.Common.Entities.csproj"
@@ -4585,7 +4585,7 @@
     ".NETStandard,Version=v2.0": [
       "Microsoft.Rest.ClientRuntime >= 3.0.3",
       "NETStandard.Library >= 2.0.3",
-      "SI.Shared.Sif.Testclient.Common.Entities >= 1.1.0"
+      "SI.Shared.Sif.Testclient.Common.Entities >= 1.1.1"
     ]
   },
   "packageFolders": {
@@ -4595,11 +4595,11 @@
   "project": {
     "version": "1.1.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\360admin\\Source\\Repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Common\\SI.Shared.Sif.Testclient.Common.csproj",
+      "projectUniqueName": "C:\\Users\\360admin\\source\\repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Common\\SI.Shared.Sif.Testclient.Common.csproj",
       "projectName": "SI.Shared.Sif.Testclient.Common",
-      "projectPath": "C:\\Users\\360admin\\Source\\Repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Common\\SI.Shared.Sif.Testclient.Common.csproj",
+      "projectPath": "C:\\Users\\360admin\\source\\repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Common\\SI.Shared.Sif.Testclient.Common.csproj",
       "packagesPath": "C:\\Users\\360admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\360admin\\Source\\Repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Common\\obj\\",
+      "outputPath": "C:\\Users\\360admin\\source\\repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Common\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -4618,8 +4618,8 @@
       "frameworks": {
         "netstandard2.0": {
           "projectReferences": {
-            "C:\\Users\\360admin\\Source\\Repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Entities\\SI.Shared.Sif.Testclient.Common.Entities.csproj": {
-              "projectPath": "C:\\Users\\360admin\\Source\\Repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Entities\\SI.Shared.Sif.Testclient.Common.Entities.csproj"
+            "C:\\Users\\360admin\\source\\repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Entities\\SI.Shared.Sif.Testclient.Common.Entities.csproj": {
+              "projectPath": "C:\\Users\\360admin\\source\\repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Entities\\SI.Shared.Sif.Testclient.Common.Entities.csproj"
             }
           }
         }

@@ -4560,13 +4560,13 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
-    "version": "1.1.0",
+    "version": "1.1.1",
     "restore": {
-      "projectUniqueName": "C:\\Users\\360admin\\Source\\Repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Entities\\SI.Shared.Sif.Testclient.Common.Entities.csproj",
+      "projectUniqueName": "C:\\Users\\360admin\\source\\repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Entities\\SI.Shared.Sif.Testclient.Common.Entities.csproj",
       "projectName": "SI.Shared.Sif.Testclient.Common.Entities",
-      "projectPath": "C:\\Users\\360admin\\Source\\Repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Entities\\SI.Shared.Sif.Testclient.Common.Entities.csproj",
+      "projectPath": "C:\\Users\\360admin\\source\\repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Entities\\SI.Shared.Sif.Testclient.Common.Entities.csproj",
       "packagesPath": "C:\\Users\\360admin\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\360admin\\Source\\Repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Entities\\obj\\",
+      "outputPath": "C:\\Users\\360admin\\source\\repos\\SIF_RPC_TestClient\\SI.Shared.Sif.Testclient\\SI.Shared.Sif.Testclient.Entities\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

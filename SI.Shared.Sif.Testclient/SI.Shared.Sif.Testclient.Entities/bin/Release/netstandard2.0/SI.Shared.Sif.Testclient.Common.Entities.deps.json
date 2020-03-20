@@ -7,7 +7,7 @@
   "targets": {
     ".NETStandard,Version=v2.0": {},
     ".NETStandard,Version=v2.0/": {
-      "SI.Shared.Sif.Testclient.Common.Entities/1.1.0": {
+      "SI.Shared.Sif.Testclient.Common.Entities/1.1.1": {
         "dependencies": {
           "Microsoft.Rest.ClientRuntime": "3.0.3",
           "NETStandard.Library": "2.0.3",
@@ -639,7 +639,7 @@
     }
   },
   "libraries": {
-    "SI.Shared.Sif.Testclient.Common.Entities/1.1.0": {
+    "SI.Shared.Sif.Testclient.Common.Entities/1.1.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

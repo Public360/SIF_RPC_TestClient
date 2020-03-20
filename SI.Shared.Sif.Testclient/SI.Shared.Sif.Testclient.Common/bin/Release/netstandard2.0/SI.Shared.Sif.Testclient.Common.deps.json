@@ -11,7 +11,7 @@
         "dependencies": {
           "Microsoft.Rest.ClientRuntime": "3.0.3",
           "NETStandard.Library": "2.0.3",
-          "SI.Shared.Sif.Testclient.Common.Entities": "1.1.0"
+          "SI.Shared.Sif.Testclient.Common.Entities": "1.1.1"
         },
         "runtime": {
           "SI.Shared.Sif.Testclient.Common.dll": {}
@@ -636,7 +636,7 @@
           }
         }
       },
-      "SI.Shared.Sif.Testclient.Common.Entities/1.1.0": {
+      "SI.Shared.Sif.Testclient.Common.Entities/1.1.1": {
         "dependencies": {
           "Microsoft.Rest.ClientRuntime": "3.0.3",
           "Newtonsoft.Json": "12.0.3"
@@ -1066,7 +1066,7 @@
       "path": "system.xml.readerwriter/4.0.11-rc2-24027",
       "hashPath": "system.xml.readerwriter.4.0.11-rc2-24027.nupkg.sha512"
     },
-    "SI.Shared.Sif.Testclient.Common.Entities/1.1.0": {
+    "SI.Shared.Sif.Testclient.Common.Entities/1.1.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

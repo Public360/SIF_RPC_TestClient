@@ -26,14 +26,48 @@ namespace SI.Shared.Sif.Testclient.Common.Entities
         [JsonProperty("UnofficialTitle")]
         public string UnofficialTitle { get; set; }
 
+        private DateTime documentDate;
+        private DateTime journalDate;
+        private DateTime dispatchedDate;
+
         [JsonProperty("DocumentDate")]
-        public DateTime DocumentDate { get; set; }
+        public DateTime DocumentDate 
+        { 
+            get 
+            {
+                return documentDate;
+            }
+            set 
+            { 
+                documentDate = DateTimeHelper.ConvertToSafeDate(value);
+            } 
+        }
 
         [JsonProperty("JournalDate")]
-        public DateTime JournalDate { get; set; }
+        public DateTime JournalDate
+        {
+            get
+            {
+                return journalDate;
+            }
+            set
+            {
+                journalDate = DateTimeHelper.ConvertToSafeDate(value);
+            }
+        }
 
         [JsonProperty("DispatchedDate")]
-        public DateTime DispatchedDate { get; set; }
+        public DateTime DispatchedDate
+        {
+            get
+            {
+                return dispatchedDate;
+            }
+            set
+            {
+                dispatchedDate = DateTimeHelper.ConvertToSafeDate(value);
+            }
+        }
 
         [JsonProperty("Category")]
         public string Category { get; set; }

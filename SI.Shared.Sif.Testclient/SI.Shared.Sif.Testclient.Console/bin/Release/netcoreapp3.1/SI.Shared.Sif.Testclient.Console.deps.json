@@ -6,13 +6,13 @@
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "SI.Shared.Sif.Testclient.Console/1.2.0": {
+      "SI.Shared.Sif.Testclient.Console/1.2.1": {
         "dependencies": {
           "Microsoft.Extensions.Configuration": "3.1.1",
           "Microsoft.Extensions.Configuration.Binder": "3.1.1",
           "Microsoft.Extensions.Configuration.Json": "3.1.1",
           "SI.Shared.Sif.Testclient.Common": "1.1.0",
-          "SI.Shared.Sif.Testclient.Common.Entities": "1.1.0"
+          "SI.Shared.Sif.Testclient.Common.Entities": "1.1.1"
         },
         "runtime": {
           "SI.Shared.Sif.Testclient.Console.dll": {}
@@ -628,13 +628,13 @@
       "SI.Shared.Sif.Testclient.Common/1.1.0": {
         "dependencies": {
           "Microsoft.Rest.ClientRuntime": "3.0.3",
-          "SI.Shared.Sif.Testclient.Common.Entities": "1.1.0"
+          "SI.Shared.Sif.Testclient.Common.Entities": "1.1.1"
         },
         "runtime": {
           "SI.Shared.Sif.Testclient.Common.dll": {}
         }
       },
-      "SI.Shared.Sif.Testclient.Common.Entities/1.1.0": {
+      "SI.Shared.Sif.Testclient.Common.Entities/1.1.1": {
         "dependencies": {
           "Microsoft.Rest.ClientRuntime": "3.0.3",
           "Newtonsoft.Json": "12.0.3"
@@ -646,7 +646,7 @@
     }
   },
   "libraries": {
-    "SI.Shared.Sif.Testclient.Console/1.2.0": {
+    "SI.Shared.Sif.Testclient.Console/1.2.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -1132,7 +1132,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "SI.Shared.Sif.Testclient.Common.Entities/1.1.0": {
+    "SI.Shared.Sif.Testclient.Common.Entities/1.1.1": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
