@@ -45,16 +45,34 @@ namespace SI.Shared.Sif.Testclient.Console
             return createDocumentOKResponse;
         }
 
-        public static CreateDocumentWithFileStreamResponse CreateDocumentWithFileStream(ServiceHelper serviceHelper, DocumentInfo documentInfo)
+        public static CreateDocumentWithFileUploadResponse CreateDocumentWithFileUpload(ServiceHelper serviceHelper, DocumentInfo documentInfo)
         {
             Byte[] bytes = File.ReadAllBytes(@$"{documentInfo.File_Path}");
 
             UploadArgs uploadArgsParameter = new UploadArgs(new UploadArgsParameter()
             {
-                FileData = bytes.Select(b => b as object).ToList(),
-                FileFormat = documentInfo.File_Format,
-                FileName = documentInfo.File_Title
+                FileData = bytes.Select(b => b as object).ToList()
             });
+
+            if (String.IsNullOrWhiteSpace(documentInfo.File_Format) == false)
+            {
+                uploadArgsParameter.Parameter.FileFormat = documentInfo.File_Format;
+            }
+
+            if (String.IsNullOrWhiteSpace(documentInfo.File_Title) == false)
+            {
+                uploadArgsParameter.Parameter.FileName = documentInfo.File_Title;
+            }
+
+            if (String.IsNullOrWhiteSpace(documentInfo.AdContextUser) == false)
+            {
+                uploadArgsParameter.Parameter.ADContextUser = documentInfo.AdContextUser;
+            }
+            
+            if(String.IsNullOrWhiteSpace(documentInfo.User) == false)
+            {
+                uploadArgsParameter.Parameter.User = documentInfo.User;
+            }
 
             UploadOKResponse uploadOKResponse = serviceHelper.FileService.Upload(uploadArgsParameter);
             
@@ -68,6 +86,18 @@ namespace SI.Shared.Sif.Testclient.Console
             List<CreateDocumentArgsParameterFilesItem> files = new List<CreateDocumentArgsParameterFilesItem>();
             files.Add(file);
 
+            CreateDocumentArgsParameterFilesFromTemplateItem template = null;
+
+            if (String.IsNullOrWhiteSpace(documentInfo.TemplateId) == false && 
+                String.IsNullOrWhiteSpace(documentInfo.TemplateTitle) == false)
+            {
+                template = new CreateDocumentArgsParameterFilesFromTemplateItem()
+                {
+                    TemplateId = documentInfo.TemplateId,
+                    Title = documentInfo.TemplateTitle
+                };
+            }
+
             CreateDocumentArgs createDocumentArgs = new CreateDocumentArgs(new CreateDocumentArgsParameter()
             {
                 CaseNumber = documentInfo.CaseNumber,
@@ -79,12 +109,16 @@ namespace SI.Shared.Sif.Testclient.Console
                 Category = documentInfo.Category,
                 Status = documentInfo.Status,
                 Files = files
-                
             });
+
+            if(template != null)
+            {
+                createDocumentArgs.Parameter.FilesFromTemplate = new[] { template };
+            }
 
             CreateDocumentOKResponse createDocumentOKResponse = serviceHelper.DocumentService.CreateDocument(createDocumentArgs);
 
-            CreateDocumentWithFileStreamResponse createDocumentWithFileStreamResponse = new CreateDocumentWithFileStreamResponse() 
+            CreateDocumentWithFileUploadResponse createDocumentWithFileStreamResponse = new CreateDocumentWithFileUploadResponse() 
             {
                 uploadOKResponse = uploadOKResponse, 
                 createDocumentOKResponse = createDocumentOKResponse 

@@ -109,7 +109,7 @@ namespace SI.Shared.Sif.Testclient.Console
         {
             if (documentInfo.StreamFile)
             {
-                var response = SampleMethodes.CreateDocumentWithFileStream(serviceHelper, documentInfo);
+                var response = SampleMethodes.CreateDocumentWithFileUpload(serviceHelper, documentInfo);
                 LogToConsole(response);
             }
             else
@@ -145,7 +145,7 @@ namespace SI.Shared.Sif.Testclient.Console
                 response.synchronizeContactPersonOKResponse.ErrorDetails);
         }
 
-        private static void LogToConsole(CreateDocumentWithFileStreamResponse response)
+        private static void LogToConsole(CreateDocumentWithFileUploadResponse response)
         {
             System.Console.WriteLine($"File respons: ");
             LogToConsole(response.uploadOKResponse.Successful ?? false,

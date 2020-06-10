@@ -11,7 +11,7 @@ namespace SI.Shared.Sif.Testclient.Common.Entities
         public SynchronizeUserOKResponse synchronizeUserOKResponset { get; set; }
     }
 
-    public class CreateDocumentWithFileStreamResponse
+    public class CreateDocumentWithFileUploadResponse
     {
         public UploadOKResponse uploadOKResponse { get; set; }
         public CreateDocumentOKResponse createDocumentOKResponse { get; set; }

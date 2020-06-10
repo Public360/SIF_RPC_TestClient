@@ -78,6 +78,18 @@ namespace SI.Shared.Sif.Testclient.Common.Entities
         [JsonProperty("StreamFile")]
         public bool StreamFile { get; set; }
 
+        [JsonProperty("AdContextUser")]
+        public string AdContextUser { get; set; }
+        
+        [JsonProperty("User")]
+        public string User { get; set; }
+
+        [JsonProperty("TemplateId")]
+        public string TemplateId { get; set; }
+
+        [JsonProperty("TemplateTitle")]
+        public string TemplateTitle { get; set; }
+
         public static DocumentInfo CreateSample()
         {
             return new DocumentInfo()

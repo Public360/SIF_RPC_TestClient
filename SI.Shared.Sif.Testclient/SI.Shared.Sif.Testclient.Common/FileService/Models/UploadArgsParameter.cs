@@ -25,13 +25,19 @@ namespace SI.Shared.Sif.Testclient.Common.Models
         /// <summary>
         /// Initializes a new instance of the UploadArgsParameter class.
         /// </summary>
-        public UploadArgsParameter(string user = default(string), IList<object> fileData = default(IList<object>), string fileName = default(string), string fileFormat = default(string))
+        public UploadArgsParameter(string aDContextUser = default(string),string user = default(string), IList<object> fileData = default(IList<object>), string fileName = default(string), string fileFormat = default(string))
         {
+            ADContextUser = aDContextUser;
             User = user;
             FileData = fileData;
             FileName = fileName;
             FileFormat = fileFormat;
         }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "ADContextUser")]
+        public string ADContextUser { get; set; }
 
         /// <summary>
         /// </summary>
