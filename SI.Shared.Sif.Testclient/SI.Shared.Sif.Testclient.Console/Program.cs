@@ -43,45 +43,66 @@ namespace SI.Shared.Sif.Testclient.Console
 
                     DocumentInfo documentInfo = config.GetSection("DocumentInfo").Get<DocumentInfo>();
                     UserInfo userInfo = config.GetSection("UserInfo").Get<UserInfo>();
-                    var serviceConfig = config.GetSection("ServiceInformation");
+                    ProjectInfo projectInfo = config.GetSection("ProjectInfo").Get<ProjectInfo>();
+                    CaseInfo caseInfo = config.GetSection("CaseInfo").Get<CaseInfo>();
+                    ServiceInformationList serviceConfig = config.GetSection("ServiceInformation").Get<ServiceInformationList>();
                     var getEnterpriseConfig = config.GetSection("GetEnterprise");
                     var createOrUpdateEnterpriseConfig = config.GetSection("CreateOrUpdateEnterprise");
 
-                    ServiceInformation serviceInformation = new ServiceInformation(
-                        serviceConfig["authkey"],
-                        serviceConfig["baseUrl"]);
-
-                    using (ServiceHelper serviceHelper = new ServiceHelper(serviceInformation))
+                    foreach(var credentials in serviceConfig.Credentials)
                     {
-                        switch (arg)
+                        if (credentials.run)
                         {
-                            case "CreateDocument":
-                                CreateDocument(serviceHelper, documentInfo);
-                                break;
-                            case "GetSIFVersion":
-                                var response1 = SampleMethodes.GetSIFVersion(serviceHelper);
-                                System.Console.WriteLine($"SIF version = { response1 }");
-                                break;
-                            case "GetEnterprises":
-                                var response2 = SampleMethodes.GetEnterprises(serviceHelper);
-                                LogToConsole(response2.Successful ?? false, response2.ErrorMessage, response2.ErrorDetails);
-                                System.Console.WriteLine($"Returned { response2.TotalCount } enterprises");
-                                break;
-                            case "GetEnterprise":
-                                var response3 = SampleMethodes.GetEnterprise(serviceHelper, getEnterpriseConfig["ExternalId"]);
-                                System.Console.WriteLine($"Returned enterprise with name = { response3.Name }");
-                                break;
-                            case "CreateOrUpdateEnterprise":
-                                var response4 = SampleMethodes.CreateOrUpdateEnterprise(serviceHelper,
-                                    createOrUpdateEnterpriseConfig["ExternalId"],
-                                    createOrUpdateEnterpriseConfig["Name"]);
-                                LogToConsole(response4.Successful ?? false, response4.ErrorMessage, response4.ErrorDetails);
-                                break;
-                            case "CreateOrUpdateUserAndContact":
-                                var response5 = SampleMethodes.CreateOrUpdateUserAndContact(serviceHelper, userInfo);
-                                LogToConsole(response5);
-                                break;
-                        }
+                            System.Console.WriteLine($"Starting on instance = { credentials.baseUri }");
+
+                            ServiceInformation serviceInformation = new ServiceInformation(
+                                                    credentials.authkey,
+                                                    credentials.baseUri);
+
+                            using (ServiceHelper serviceHelper = new ServiceHelper(serviceInformation))
+                            {
+                                switch (arg)
+                                {
+                                    case "CreateCase":
+                                        var response6 = SampleMethodes.CreateCase(serviceHelper, caseInfo, projectInfo);
+                                        LogToConsole(response6);
+                                        break;
+                                    case "CreateProject":
+                                        var response7 = SampleMethodes.CreateProject(serviceHelper, projectInfo);
+                                        LogToConsole(response7.Successful ?? false, response7.ErrorMessage, response7.ErrorDetails);
+                                        break;
+                                    case "CreateDocument":
+                                        CreateDocument(serviceHelper, documentInfo, caseInfo, projectInfo);
+                                        break;
+                                    case "GetSIFVersion":
+                                        var response1 = SampleMethodes.GetSIFVersion(serviceHelper);
+                                        System.Console.WriteLine($"SIF version = { response1 }");
+                                        break;
+                                    case "GetEnterprises":
+                                        var response2 = SampleMethodes.GetEnterprises(serviceHelper);
+                                        LogToConsole(response2.Successful ?? false, response2.ErrorMessage, response2.ErrorDetails);
+                                        System.Console.WriteLine($"Returned { response2.TotalCount } enterprises");
+                                        break;
+                                    case "GetEnterprise":
+                                        var response3 = SampleMethodes.GetEnterprise(serviceHelper, getEnterpriseConfig["ExternalId"]);
+                                        System.Console.WriteLine($"Returned enterprise with name = { response3.Name }");
+                                        break;
+                                    case "CreateOrUpdateEnterprise":
+                                        var response4 = SampleMethodes.CreateOrUpdateEnterprise(serviceHelper,
+                                            createOrUpdateEnterpriseConfig["ExternalId"],
+                                            createOrUpdateEnterpriseConfig["Name"]);
+                                        LogToConsole(response4.Successful ?? false, response4.ErrorMessage, response4.ErrorDetails);
+                                        break;
+                                    case "CreateOrUpdateUserAndContact":
+                                        var response5 = SampleMethodes.CreateOrUpdateUserAndContact(serviceHelper, userInfo);
+                                        LogToConsole(response5);
+                                        break;
+                                }
+                            }
+
+                            System.Console.WriteLine($"End on instance = { credentials.baseUri }");
+                            System.Console.WriteLine($"");
+                        }                        
                     }
                 }
                 catch(HttpOperationException he)
@@ -105,16 +126,16 @@ namespace SI.Shared.Sif.Testclient.Console
             }
         }
 
-        private static void CreateDocument(ServiceHelper serviceHelper, DocumentInfo documentInfo)
+        private static void CreateDocument(ServiceHelper serviceHelper, DocumentInfo documentInfo, CaseInfo caseInfo, ProjectInfo projectInfo)
         {
             if (documentInfo.StreamFile)
             {
-                var response = SampleMethodes.CreateDocumentWithFileUpload(serviceHelper, documentInfo);
+                var response = SampleMethodes.CreateDocumentWithFileUpload(serviceHelper, documentInfo, caseInfo, projectInfo);
                 LogToConsole(response);
             }
             else
             {
-                var response = SampleMethodes.CreateDocument(serviceHelper, documentInfo);
+                var response = SampleMethodes.CreateDocument(serviceHelper, documentInfo, caseInfo, projectInfo);
                 LogToConsole(response.Successful ?? false, response.ErrorMessage, response.ErrorDetails);
             }
         }
@@ -152,10 +173,33 @@ namespace SI.Shared.Sif.Testclient.Console
                 response.uploadOKResponse.ErrorMessage,
                 response.uploadOKResponse.ErrorDetails);
 
+            System.Console.WriteLine($"Project respons: ");
+            LogToConsole(response.createCaseWithProjectResponse.createProjectOKResponse.Successful ?? false,
+                response.createCaseWithProjectResponse.createProjectOKResponse.ErrorMessage,
+                response.createCaseWithProjectResponse.createProjectOKResponse.ErrorDetails);
+
+            System.Console.WriteLine($"Case respons: ");
+            LogToConsole(response.createCaseWithProjectResponse.createCaseOKResponse.Successful ?? false,
+                response.createCaseWithProjectResponse.createCaseOKResponse.ErrorMessage,
+                response.createCaseWithProjectResponse.createCaseOKResponse.ErrorDetails);
+
             System.Console.WriteLine($"Document respons: ");
             LogToConsole(response.createDocumentOKResponse.Successful ?? false,
                 response.createDocumentOKResponse.ErrorMessage,
                 response.createDocumentOKResponse.ErrorDetails);
+        }
+
+        private static void LogToConsole(CreateCaseWithProjectResponse response)
+        {
+            System.Console.WriteLine($"Project respons: ");
+            LogToConsole(response.createProjectOKResponse.Successful ?? false,
+                response.createProjectOKResponse.ErrorMessage,
+                response.createProjectOKResponse.ErrorDetails);
+
+            System.Console.WriteLine($"Case respons: ");
+            LogToConsole(response.createCaseOKResponse.Successful ?? false,
+                response.createCaseOKResponse.ErrorMessage,
+                response.createCaseOKResponse.ErrorDetails);
         }
     }
 }

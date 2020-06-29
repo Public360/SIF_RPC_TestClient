@@ -12,7 +12,7 @@ namespace SI.Shared.Sif.Testclient.Console
 {
     public static class SampleMethodes
     {
-        public static CreateDocumentOKResponse CreateDocument(ServiceHelper serviceHelper, DocumentInfo documentInfo)
+        public static CreateDocumentOKResponse CreateDocument(ServiceHelper serviceHelper, DocumentInfo documentInfo, CaseInfo caseInfo, ProjectInfo projectInfo)
         {
             Byte[] bytes = File.ReadAllBytes(@$"{documentInfo.File_Path}");
             String base64file = Convert.ToBase64String(bytes);
@@ -28,6 +28,14 @@ namespace SI.Shared.Sif.Testclient.Console
             List<CreateDocumentArgsParameterFilesItem> files = new List<CreateDocumentArgsParameterFilesItem>();
             files.Add(file);
 
+            CreateCaseWithProjectResponse createCaseWithProjectResponse = null;
+            if (documentInfo.CreateCase)
+            {
+                createCaseWithProjectResponse = CreateCase(serviceHelper,caseInfo, projectInfo);
+
+                documentInfo.CaseNumber = createCaseWithProjectResponse.createCaseOKResponse.CaseNumber;
+            }
+
             CreateDocumentArgs createDocumentArgs = new CreateDocumentArgs(new CreateDocumentArgsParameter()
             {
                 CaseNumber = documentInfo.CaseNumber,
@@ -42,10 +50,45 @@ namespace SI.Shared.Sif.Testclient.Console
             });
 
             CreateDocumentOKResponse createDocumentOKResponse = serviceHelper.DocumentService.CreateDocument(createDocumentArgs);
+
+            CreateDocumentWithCaseResponse createDocumentWithFileStreamResponse = new CreateDocumentWithCaseResponse()
+            {
+                createDocumentOKResponse = createDocumentOKResponse,
+                createCaseWithProjectResponse = createCaseWithProjectResponse ?? new CreateCaseWithProjectResponse()
+            };
+
+
             return createDocumentOKResponse;
         }
 
-        public static CreateDocumentWithFileUploadResponse CreateDocumentWithFileUpload(ServiceHelper serviceHelper, DocumentInfo documentInfo)
+        public static CreateCaseWithProjectResponse CreateCase(ServiceHelper serviceHelper, CaseInfo caseInfo, ProjectInfo projectInfo)
+        {
+            CreateProjectOKResponse createProjectOKResponse = null;
+            if (caseInfo.CreateProject)
+            {
+                createProjectOKResponse = CreateProject(serviceHelper, projectInfo);
+
+                caseInfo.Project = createProjectOKResponse.ProjectNumber;
+            }
+
+            CreateCaseArgsParameter createCaseArgsParameter = new CreateCaseArgsParameter()
+            {
+                Title = caseInfo.Title,
+                Project = caseInfo.Project
+            };
+
+            CreateCaseOKResponse createCaseOKResponse = serviceHelper.CaseService.CreateCase(new CreateCaseArgs(createCaseArgsParameter));
+
+            CreateCaseWithProjectResponse createCaseWithProjectResponse = new CreateCaseWithProjectResponse()
+            {
+                createCaseOKResponse = createCaseOKResponse,
+                createProjectOKResponse = createProjectOKResponse ?? new CreateProjectOKResponse()
+            };
+
+            return createCaseWithProjectResponse;
+        }
+
+        public static CreateDocumentWithFileUploadResponse CreateDocumentWithFileUpload(ServiceHelper serviceHelper, DocumentInfo documentInfo, CaseInfo caseInfo, ProjectInfo projectInfo)
         {
             Byte[] bytes = File.ReadAllBytes(@$"{documentInfo.File_Path}");
 
@@ -98,6 +141,14 @@ namespace SI.Shared.Sif.Testclient.Console
                 };
             }
 
+            CreateCaseWithProjectResponse createCaseWithProjectResponse = null;
+            if (documentInfo.CreateCase)
+            {
+                createCaseWithProjectResponse = CreateCase(serviceHelper, caseInfo, projectInfo);
+
+                documentInfo.CaseNumber = createCaseWithProjectResponse.createCaseOKResponse.CaseNumber;
+            }
+
             CreateDocumentArgs createDocumentArgs = new CreateDocumentArgs(new CreateDocumentArgsParameter()
             {
                 CaseNumber = documentInfo.CaseNumber,
@@ -121,10 +172,24 @@ namespace SI.Shared.Sif.Testclient.Console
             CreateDocumentWithFileUploadResponse createDocumentWithFileStreamResponse = new CreateDocumentWithFileUploadResponse() 
             {
                 uploadOKResponse = uploadOKResponse, 
-                createDocumentOKResponse = createDocumentOKResponse 
+                createDocumentOKResponse = createDocumentOKResponse,
+                createCaseWithProjectResponse = createCaseWithProjectResponse ?? new CreateCaseWithProjectResponse()
             };
 
             return createDocumentWithFileStreamResponse;
+        }
+
+        public static CreateProjectOKResponse CreateProject(ServiceHelper serviceHelper, ProjectInfo projectInfo)
+        {
+            CreateProjectArgsParameter createProjectArgsParameter = new CreateProjectArgsParameter()
+            {
+                Title = projectInfo.Title,
+            };
+
+            CreateProjectOKResponse createProjectOKResponse = serviceHelper.ProjectService.CreateProject(
+                new CreateProjectArgs(createProjectArgsParameter));
+
+            return createProjectOKResponse;
         }
 
         /// <summary>

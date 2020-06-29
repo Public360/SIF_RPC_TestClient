@@ -19,6 +19,7 @@ namespace SI.Shared.Sif.Testclient.Common
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
     using Models;
+    using System.IO;
 
     /// <summary>
     /// 
@@ -423,6 +424,8 @@ namespace SI.Shared.Sif.Testclient.Common
                 _requestContent = SafeJsonConvert.SerializeObject(createDocumentArgs, this.SerializationSettings);
                 _httpRequest.Content = new StringContent(_requestContent, Encoding.UTF8);
                 _httpRequest.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
+
+                //File.AppendAllText("C:/Users/360admin/Downloads/test/test.txt", _requestContent);
             }
             // Set Credentials
             if (this.Credentials != null)
